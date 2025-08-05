@@ -3,19 +3,15 @@ steps:
     entrypoint: 'git'
     args: ['clone', 'https://github.com/AnupDudhe/studentapp-ui.git']
 
-  - name: 'gcr.io/cloud-builders/mvn'
+  - name: 'gcr.io/cloud-builders/mvn:3.8.7-openjdk-11'
     dir: 'studentapp-ui'
-    args: ['package']
-    env:
-      - 'JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64'
-      - 'MAVEN_OPTS=--enable-preview'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        apt-get update && apt-get install openjdk-11-jdk -y && \
-        export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64 && \
-        java -version && mvn package
+    args: ['clean', 'package']
+
+artifacts:
+  objects:
+    location: 'gs://YOUR-BUCKET-NAME/artifacts/'
+    paths:
+      - 'studentapp-ui/target/*.war'
 
 options:
   logging: CLOUD_LOGGING_ONLY
