@@ -6,10 +6,16 @@ steps:
   - name: 'gcr.io/cloud-builders/mvn'
     dir: 'studentapp-ui'
     args: ['package']
-
-  - name: 'gcr.io/cloud-builders/gcloud'
+    env:
+      - 'JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64'
+      - 'MAVEN_OPTS=--enable-preview'
     entrypoint: 'bash'
-    args: ['deploy.sh']
+    args:
+      - '-c'
+      - |
+        apt-get update && apt-get install openjdk-11-jdk -y && \
+        export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64 && \
+        java -version && mvn package
 
 options:
   logging: CLOUD_LOGGING_ONLY
