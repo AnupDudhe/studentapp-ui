@@ -3,9 +3,11 @@ steps:
     entrypoint: 'git'
     args: ['clone', 'https://github.com/AnupDudhe/studentapp-ui.git']
 
-  - name: 'gcr.io/cloud-builders/mvn:3.8.7-openjdk-11'
+  - name: 'gcr.io/cloud-builders/mvn'
     dir: 'studentapp-ui'
     args: ['clean', 'package']
+    env:
+      - 'JAVA_VERSION=11'
 
 artifacts:
   objects:
