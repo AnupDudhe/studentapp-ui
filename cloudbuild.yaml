@@ -1,0 +1,10 @@
+steps:
+  - name: 'gcr.io/cloud-builders/git'
+    entrypoint: 'git'
+    args: ['clone', 'https://github.com/AnupDudhe/studentapp-ui.git']
+
+  - name: 'gcr.io/cloud-builders/mvn'
+    dir: 'studentapp-ui'
+    args: ['package']
+
+timeout: 600s
