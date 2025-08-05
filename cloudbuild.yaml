@@ -7,4 +7,9 @@ steps:
     dir: 'studentapp-ui'
     args: ['package']
 
-timeout: 600s
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args: ['deploy.sh']
+
+options:
+  logging: CLOUD_LOGGING_ONLY
