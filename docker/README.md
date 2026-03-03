@@ -326,28 +326,28 @@ This confirms that the Docker image is fully portable and production-ready.
 
 ---
 
-🚀 PROJECT: StudentApp Deployment using Docker Compose
+#   🚀 PROJECT: StudentApp Deployment using Docker Compose
 
 ----------------------------------------------------
 
-📌 What is Docker Compose?
+##   📌 What is Docker Compose?
 
 Docker Compose is a tool used to run multiple containers using a single YAML file.
 It helps manage application + database together.
 
 ----------------------------------------------------
 
-  **Create docker-compose.yml file**
+###   **Create docker-compose.yml file**
 
-1   : Create Database (Amazon RDS)
-
----
-
-2   : Create EC2 Instance & connect
+### 1   : Create Database (Amazon RDS)
 
 ---
 
-3 : Install Docker & compose both
+###  2   : Create EC2 Instance & connect
+
+---
+
+###  3 : Install Docker & compose both
 
 sudo yum update -y
 sudo yum install docker -y
@@ -357,14 +357,14 @@ docker compose version
 
 ---
 
-4️  :Go to Project Folder
+###  4️  :Go to Project Folder
 
 git clone <your-repo-url>
 cd studentapp-ui/docker
 
 ---
 
-5 :Start Application
+###  5 :Start Application
 
 Run:
 
@@ -381,7 +381,7 @@ docker ps
 
 ---
 
-7️ : Access Application
+###  6: Access Application
 
 Open browser:
 
