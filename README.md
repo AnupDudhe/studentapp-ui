@@ -127,7 +127,6 @@ Frontend will load successfully.
 <img src="screenshots/frontend.png" width="600">
 
 ---
-
 After RDS is created:
 
 ```bash
