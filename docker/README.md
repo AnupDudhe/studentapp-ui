@@ -410,3 +410,172 @@ docker compose down    → Stop and remove containers
 docker ps              → Check running containers  
 ```
 ---
+
+
+### 🚀 AWS ECR (Elastic Container Registry)
+
+
+## 1️⃣ What is ECR?
+
+AWS ECR (Amazon Elastic Container Registry) is a container image registry service.
+
+Just like Docker Hub stores Docker images,
+ECR stores Docker images inside your AWS account.
+
+✔ Private
+✔ Secure
+✔ Fast for AWS services (EC2, ECS, EKS)
+
+======================================================================
+## 📤 PUSH IMAGE TO AWS ECR
+======================================================================
+
+## STEP 1️⃣ : Create Repository in AWS ECR
+
+1) Go to AWS Console
+2) Open ECR service
+3) Click Create Repository
+4) Give repository name → studentapp
+5) Create
+
+After creation, AWS will give a repository URL like:
+
+221996522287.dkr.ecr.us-east-2.amazonaws.com/studentapp
+
+Copy this URL.
+
+---------------------------------------------------------------------
+
+## STEP 2️⃣ : Give AWS Access to EC2
+```bash
+Install AWS CLI:
+
+For Ubuntu:
+apt update
+apt install awscli -y
+
+For Amazon Linux:
+sudo yum install awscli -y
+```
+Configure AWS:
+
+aws configure
+
+Enter:
+- Access Key
+- Secret Key
+- Region → us-east-2
+- Output → json
+
+Now EC2 is connected to AWS account.
+
+---------------------------------------------------------------------
+
+## STEP 3️⃣ : Login Docker to ECR
+
+Login Docker to ECR using temporary password:
+
+aws ecr get-login-password --region us-east-2 | \
+docker login --username AWS --password-stdin 221996522287.dkr.ecr.us-east-2.amazonaws.com
+
+Now Docker is authenticated to push images.
+
+---------------------------------------------------------------------
+
+## STEP 4️⃣ : Tag Local Image to ECR Format
+
+Check local images:
+```bash
+docker images
+```
+
+Tag image using:
+```bash
+docker tag <image-id> 221996522287.dkr.ecr.us-east-2.amazonaws.com/studentapp:01
+```
+```bash
+Example:
+docker tag fa23e21bdaa2 221996522287.dkr.ecr.us-east-2.amazonaws.com/studentapp:01
+```
+Now image name is converted to ECR format.
+
+---------------------------------------------------------------------
+
+## STEP 5️⃣ : Push Image to ECR
+```bash
+docker push 221996522287.dkr.ecr.us-east-2.amazonaws.com/studentapp:01
+```
+Docker uploads the image to AWS ECR repository.
+
+Image is now stored inside AWS account ✅
+
+======================================================================
+## 📥 PULL IMAGE FROM AWS ECR & CREATE CONTAINER
+======================================================================
+
+## STEP 1️⃣ : Create New EC2 Instance
+
+- Launch EC2
+- Install Docker
+- Open Port 8080 in Security Group
+
+---------------------------------------------------------------------
+
+STEP 2️⃣ : Install AWS CLI & Configure
+
+For Ubuntu:
+```bash
+apt install awscli -y
+```
+
+Then:
+```bash
+aws configure
+```
+Enter:
+- Access Key
+- Secret Key
+- Region → us-east-2
+
+---------------------------------------------------------------------
+
+## STEP 3️⃣ : Login Docker to ECR
+```bash
+aws ecr get-login-password --region us-east-2 | \
+docker login --username AWS --password-stdin 221996522287.dkr.ecr.us-east-2.amazonaws.com
+```
+---------------------------------------------------------------------
+
+## STEP 4️⃣ : Pull Image from ECR
+```bash
+docker pull 221996522287.dkr.ecr.us-east-2.amazonaws.com/studentapp:01
+```
+Image will be downloaded to EC2.
+
+---------------------------------------------------------------------
+
+## STEP 5️⃣ : Create Container from ECR Image
+```bash
+docker run -d -p 8080:8080 221996522287.dkr.ecr.us-east-2.amazonaws.com/studentapp:01
+```
+---------------------------------------------------------------------
+
+STEP 6️⃣ : Access Application
+
+Open browser:
+```bash
+http://<EC2-public-ip>:8080
+```
+Application should be running ✅
+
+======================================================================
+
+🎯 What We Learned
+
+- What is AWS ECR
+- How to push image to ECR
+- How to authenticate Docker with AWS
+- How to pull image from ECR
+- How to deploy container from ECR
+
+
