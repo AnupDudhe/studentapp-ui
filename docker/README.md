@@ -412,7 +412,7 @@ docker ps              → Check running containers
 ---
 
 
-### 🚀 AWS ECR (Elastic Container Registry)
+# 🚀 AWS ECR (Elastic Container Registry)
 
 
 ## 1️⃣ What is ECR?
