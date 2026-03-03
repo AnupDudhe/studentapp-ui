@@ -348,26 +348,26 @@ It helps manage application + database together.
 ---
 
 ###  3 : Install Docker & compose both
-
+```bash
 sudo yum update -y
 sudo yum install docker -y
 
 Check:
 docker compose version
-
+```
 ---
 
 ###  4️  :Go to Project Folder
-
+```bash
 git clone <your-repo-url>
 cd studentapp-ui/docker
-
+```
 ---
 
 ###  5 :Start Application
 
 Run:
-
+```bash
 docker compose up -d
 
 This will:
@@ -378,32 +378,35 @@ This will:
 Check running containers:
 
 docker ps
-
+```
 ---
 
 ###  6: Access Application
 
 Open browser:
-
+```bash
 http://<your-ec2-public-ip>:8080
 
 Application should be running ✅
-
+```
 ---
 
-STOP APPLICATION
-
+### STOP APPLICATION
+```bash
 To stop containers:
 
 docker compose down
-
+```
 ---
 
-📌 Important Commands
-
-docker compose up -d   → Start containers  
+### 📌 Important Commands
+```bash
+docker compose up -d   → Start containers 
+```
+```bash
 docker compose down    → Stop and remove containers  
+```
+```bash
 docker ps              → Check running containers  
-docker logs studentapp → Check logs  
-
+```
 ---
